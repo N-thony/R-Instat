@@ -2438,7 +2438,7 @@ DataSheet$set("public","append_climatic_types", function(types) {
     col <- self$get_climatic_column_name(names(types)[i])
     if(!is.null(col)) self$append_to_variables_metadata(col, climatic_type_label, NULL)
   }
-  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
+  invisible(sapply(names(types), function(name) self$append_to_www.reading.ac.uk/pgapply.variables_metadata(types[name], climatic_type_label, name)))
   cat("Climatic dataset:", self$get_metadata(data_name_label), "\n")
   cat("----------------\n")
   cat("Update", "\n")
@@ -2451,7 +2451,7 @@ DataSheet$set("public","append_climatic_types", function(types) {
 
 #Method for creating inventory plot
 
-DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"), title = NULL, subtitle = NULL, caption = NULL)) {
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
   if(!lubridate::is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
@@ -2599,7 +2599,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       }
     }
     else if(length(element_cols) > 1) {
-      g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + ggplot2::labs(y = "Elements")
+      g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + ggplot2::labs(y = "Elements")
     }
     else {
       g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = element_cols)
@@ -2607,6 +2607,9 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
   }
   if(coord_flip) {
     g <- g + ggplot2::coord_flip()
+  }
+  if(!is.null(title) && !is.null(subtitle) && !is.null(caption)){
+      g <- g + ggplot2::labs(title = title, subtitle = subtitle, caption = caption)
   }
   return(g + ggplot2::ggtitle(graph_title) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)))
 }

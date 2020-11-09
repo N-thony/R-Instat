@@ -16,8 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgInventoryPlot
-    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bResetSubdialog As Boolean = True
     Private clsInventoryPlot As RFunction
     Private clsClimaticMissing As RFunction
     Private clsClimaticDetails As RFunction
@@ -269,10 +270,11 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgPlots.ShowDialog()
+        sdgInventoryGraph.SetRCode(clsInventoryPlots:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryGraph.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -333,4 +335,8 @@ Public Class dlgInventoryPlot
 
     End Sub
 
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        ' sdgInventoryGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverDate.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction, clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY, clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, bReset:=bResetSubdialog)
+        sdgInventoryGraph.ShowDialog()
+    End Sub
 End Class
