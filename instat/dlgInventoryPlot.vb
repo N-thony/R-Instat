@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
     Private clsInventoryPlot As RFunction
     Private clsClimaticMissing As RFunction
     Private clsClimaticDetails As RFunction
+    Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -333,4 +334,9 @@ Public Class dlgInventoryPlot
 
     End Sub
 
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        sdgInventoryGraph.SetRCode(clsInventoryNew:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryGraph.ShowDialog()
+        bResetSubdialog = False
+    End Sub
 End Class
