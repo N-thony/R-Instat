@@ -3636,9 +3636,6 @@
   <data name="ToolStripSeparator68.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
   </data>
-  <data name="mnuStructuredCircularCirclize.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuStructuredCircularCirclize.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
   </data>
@@ -6446,9 +6443,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>

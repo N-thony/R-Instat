@@ -190,6 +190,12 @@
     <Compile Include="dlgAugment.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCirclize.Designer.vb">
+      <DependentUpon>dlgCirclize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCirclize.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCircular.Designer.vb">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </Compile>
@@ -2691,6 +2697,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCirclize.resx">
+      <DependentUpon>dlgCirclize.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>

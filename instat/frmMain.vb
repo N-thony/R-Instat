@@ -2278,4 +2278,8 @@ Public Class frmMain
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
+
+    Private Sub mnuStructuredCircularCirclize_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCirclize.Click
+        dlgCirclize.ShowDialog()
+    End Sub
 End Class
