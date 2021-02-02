@@ -48,7 +48,7 @@ Public Class dlgCirclize
 
     Private Sub InitialiseDialog()
         Dim dctComboType As New Dictionary(Of String, String)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        '  ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorCircosPlots.SetParameter(New RParameter("data_name", 0, bNewIncludeArgumentName:=False))
         ucrSelectorCircosPlots.SetParameterIsrfunction()
@@ -140,15 +140,15 @@ Public Class dlgCirclize
         clsCircosTrackHist.AddParameter("bg.col", Chr(34) & "white" & Chr(34), iPosition:=0)
         clsCircosTrackHist.AddParameter("col", Chr(34) & "blue" & Chr(34), iPosition:=1)
 
-        ' clsCircosTrackHist.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCircosPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsCircosTrackPlotRegion.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCircosPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosPar, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosInitialise, iPosition:=1)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackPlotRegion, iPosition:=2)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackHist, iPosition:=3)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosPar, iPosition:=0)
         ucrBase.clsRsyntax.iCallType = 3
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        'ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackHist, iPosition:=3)
 
     End Sub
 
@@ -187,12 +187,13 @@ Public Class dlgCirclize
     Private Sub ucrInputComboType_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputComboType.ControlValueChanged
         Dim strChangedText As String = ""
         strChangedText = ucrChangedControl.GetText
-        'If strChangedText = "Hist" Then
-        '    ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackHist, iPosition:=3)
-        '    ucrBase.clsRsyntax.iCallType = 3
-        'ElseIf strChangedText = "Point" Then
-        '    ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackPoints, iPosition:=3)
-        '    ucrBase.clsRsyntax.iCallType = 3
-        'End If
+        If strChangedText = "Hist" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsCircosTrackHist, iPosition:=2)
+            clsCircosTrackHist.iCallType = 3
+            clsCircosTrackHist.bExcludeAssignedFunctionOutput = False
+            'ElseIf strChangedText = "Point" Then
+            '    ucrBase.clsRsyntax.AddToBeforeCodes(clsCircosTrackPoints, iPosition:=3)
+            '    ucrBase.clsRsyntax.iCallType = 3
+        End If
     End Sub
 End Class

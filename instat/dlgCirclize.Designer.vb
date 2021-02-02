@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCirclize
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgCirclize
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.rdoElement = New System.Windows.Forms.RadioButton()
@@ -50,9 +50,9 @@ Partial Class dlgCirclize
         Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(68, 7)
+        Me.rdoStation.Location = New System.Drawing.Point(84, 12)
         Me.rdoStation.Name = "rdoStation"
-        Me.rdoStation.Size = New System.Drawing.Size(135, 27)
+        Me.rdoStation.Size = New System.Drawing.Size(119, 27)
         Me.rdoStation.TabIndex = 1
         Me.rdoStation.Text = "Station"
         Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -67,9 +67,9 @@ Partial Class dlgCirclize
         Me.rdoElement.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoElement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoElement.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoElement.Location = New System.Drawing.Point(201, 7)
+        Me.rdoElement.Location = New System.Drawing.Point(201, 12)
         Me.rdoElement.Name = "rdoElement"
-        Me.rdoElement.Size = New System.Drawing.Size(135, 27)
+        Me.rdoElement.Size = New System.Drawing.Size(119, 27)
         Me.rdoElement.TabIndex = 2
         Me.rdoElement.Text = "Element"
         Me.rdoElement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -79,9 +79,9 @@ Partial Class dlgCirclize
         '
         Me.cmdCircosOptions.Enabled = False
         Me.cmdCircosOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircosOptions.Location = New System.Drawing.Point(7, 237)
+        Me.cmdCircosOptions.Location = New System.Drawing.Point(10, 242)
         Me.cmdCircosOptions.Name = "cmdCircosOptions"
-        Me.cmdCircosOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdCircosOptions.Size = New System.Drawing.Size(108, 23)
         Me.cmdCircosOptions.TabIndex = 14
         Me.cmdCircosOptions.Text = "Circos Options"
         Me.cmdCircosOptions.UseVisualStyleBackColor = True
@@ -90,7 +90,7 @@ Partial Class dlgCirclize
         '
         Me.lblSectors.AutoSize = True
         Me.lblSectors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSectors.Location = New System.Drawing.Point(262, 54)
+        Me.lblSectors.Location = New System.Drawing.Point(254, 70)
         Me.lblSectors.Name = "lblSectors"
         Me.lblSectors.Size = New System.Drawing.Size(46, 13)
         Me.lblSectors.TabIndex = 4
@@ -100,7 +100,7 @@ Partial Class dlgCirclize
         '
         Me.lblType.AutoSize = True
         Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblType.Location = New System.Drawing.Point(262, 101)
+        Me.lblType.Location = New System.Drawing.Point(254, 114)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(34, 13)
         Me.lblType.TabIndex = 6
@@ -110,7 +110,7 @@ Partial Class dlgCirclize
         '
         Me.lblYVariable.AutoSize = True
         Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYVariable.Location = New System.Drawing.Point(262, 154)
+        Me.lblYVariable.Location = New System.Drawing.Point(254, 159)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblYVariable.TabIndex = 8
@@ -121,7 +121,7 @@ Partial Class dlgCirclize
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(262, 205)
+        Me.lblXVariable.Location = New System.Drawing.Point(254, 203)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 10
@@ -132,7 +132,7 @@ Partial Class dlgCirclize
         '
         Me.lblByFacet.AutoSize = True
         Me.lblByFacet.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblByFacet.Location = New System.Drawing.Point(262, 255)
+        Me.lblByFacet.Location = New System.Drawing.Point(254, 247)
         Me.lblByFacet.Name = "lblByFacet"
         Me.lblByFacet.Size = New System.Drawing.Size(37, 13)
         Me.lblByFacet.TabIndex = 12
@@ -142,7 +142,7 @@ Partial Class dlgCirclize
         'ucrReceiverFacet
         '
         Me.ucrReceiverFacet.frmParent = Me
-        Me.ucrReceiverFacet.Location = New System.Drawing.Point(262, 270)
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(253, 262)
         Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
         Me.ucrReceiverFacet.Selector = Nothing
@@ -154,7 +154,7 @@ Partial Class dlgCirclize
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(262, 220)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(253, 218)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -166,7 +166,7 @@ Partial Class dlgCirclize
         'ucrReceiverY
         '
         Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(262, 169)
+        Me.ucrReceiverY.Location = New System.Drawing.Point(253, 174)
         Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverY.Name = "ucrReceiverY"
         Me.ucrReceiverY.Selector = Nothing
@@ -180,15 +180,15 @@ Partial Class dlgCirclize
         Me.ucrInputComboType.AddQuotesIfUnrecognised = True
         Me.ucrInputComboType.GetSetSelectedIndex = -1
         Me.ucrInputComboType.IsReadOnly = False
-        Me.ucrInputComboType.Location = New System.Drawing.Point(262, 117)
+        Me.ucrInputComboType.Location = New System.Drawing.Point(253, 129)
         Me.ucrInputComboType.Name = "ucrInputComboType"
-        Me.ucrInputComboType.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputComboType.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputComboType.TabIndex = 7
         '
         'ucrReceiverSectors
         '
         Me.ucrReceiverSectors.frmParent = Me
-        Me.ucrReceiverSectors.Location = New System.Drawing.Point(262, 69)
+        Me.ucrReceiverSectors.Location = New System.Drawing.Point(253, 85)
         Me.ucrReceiverSectors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSectors.Name = "ucrReceiverSectors"
         Me.ucrReceiverSectors.Selector = Nothing
@@ -199,7 +199,7 @@ Partial Class dlgCirclize
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(7, 339)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 296)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(254, 24)
@@ -207,17 +207,17 @@ Partial Class dlgCirclize
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(63, 5)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(63, 10)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
-        Me.ucrPnlOptions.TabIndex = 26
+        Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrSelectorCircosPlots
         '
         Me.ucrSelectorCircosPlots.bDropUnusedFilterLevels = False
         Me.ucrSelectorCircosPlots.bShowHiddenColumns = False
         Me.ucrSelectorCircosPlots.bUseCurrentFilter = True
-        Me.ucrSelectorCircosPlots.Location = New System.Drawing.Point(7, 54)
+        Me.ucrSelectorCircosPlots.Location = New System.Drawing.Point(10, 54)
         Me.ucrSelectorCircosPlots.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCircosPlots.Name = "ucrSelectorCircosPlots"
         Me.ucrSelectorCircosPlots.Size = New System.Drawing.Size(221, 180)
@@ -225,7 +225,7 @@ Partial Class dlgCirclize
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 370)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 328)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 52)
         Me.ucrBase.TabIndex = 16
@@ -234,7 +234,7 @@ Partial Class dlgCirclize
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 421)
+        Me.ClientSize = New System.Drawing.Size(414, 383)
         Me.Controls.Add(Me.lblByFacet)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrReceiverX)
