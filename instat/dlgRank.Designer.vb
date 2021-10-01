@@ -39,32 +39,51 @@ Partial Class dlgRank
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRank))
-        Me.lblColumnsToRank = New System.Windows.Forms.Label()
+        Me.lblVariable = New System.Windows.Forms.Label()
         Me.grpTies = New System.Windows.Forms.GroupBox()
         Me.rdoRandom = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMissingValues = New instat.UcrPanel()
+        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
+        Me.rdoNonNegative = New System.Windows.Forms.RadioButton()
+        Me.rdoSort = New System.Windows.Forms.RadioButton()
+        Me.rdoRank = New System.Windows.Forms.RadioButton()
+        Me.ucrChkMissingLast = New instat.ucrCheck()
+        Me.ucrChkDecreasing = New instat.ucrCheck()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveRank = New instat.ucrSave()
+        Me.ucrPnlMissingValues = New instat.UcrPanel()
+        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlOption = New instat.UcrPanel()
+        Me.rdoRound = New System.Windows.Forms.RadioButton()
+        Me.rdoSignif = New System.Windows.Forms.RadioButton()
+        Me.rdoScale = New System.Windows.Forms.RadioButton()
+        Me.rdoLag = New System.Windows.Forms.RadioButton()
+        Me.rdoLead = New System.Windows.Forms.RadioButton()
+        Me.rdoDifference = New System.Windows.Forms.RadioButton()
+        Me.ucrNudDigits = New instat.ucrNud()
+        Me.lblDigits = New System.Windows.Forms.Label()
+        Me.ucrNudSignif = New instat.ucrNud()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblColumnsToRank
+        'lblVariable
         '
-        resources.ApplyResources(Me.lblColumnsToRank, "lblColumnsToRank")
-        Me.lblColumnsToRank.Name = "lblColumnsToRank"
-        Me.lblColumnsToRank.Tag = ""
+        resources.ApplyResources(Me.lblVariable, "lblVariable")
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Tag = ""
         '
         'grpTies
         '
@@ -119,11 +138,6 @@ Partial Class dlgRank
         Me.rdoAverage.Tag = "Average"
         Me.rdoAverage.UseVisualStyleBackColor = True
         '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
@@ -159,15 +173,85 @@ Partial Class dlgRank
         Me.rdoFirstMissingValues.Tag = "First"
         Me.rdoFirstMissingValues.UseVisualStyleBackColor = True
         '
-        'ucrPnlMissingValues
+        'rdoNumeric
         '
-        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
-        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
+        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
+        Me.rdoNumeric.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatAppearance.BorderSize = 2
+        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.TabStop = True
+        Me.rdoNumeric.Tag = "Numeric"
+        Me.rdoNumeric.UseVisualStyleBackColor = False
+        '
+        'rdoNonNegative
+        '
+        resources.ApplyResources(Me.rdoNonNegative, "rdoNonNegative")
+        Me.rdoNonNegative.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNonNegative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.FlatAppearance.BorderSize = 2
+        Me.rdoNonNegative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.Name = "rdoNonNegative"
+        Me.rdoNonNegative.TabStop = True
+        Me.rdoNonNegative.Tag = "Non_Negative"
+        Me.rdoNonNegative.UseVisualStyleBackColor = False
+        '
+        'rdoSort
+        '
+        resources.ApplyResources(Me.rdoSort, "rdoSort")
+        Me.rdoSort.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSort.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.FlatAppearance.BorderSize = 2
+        Me.rdoSort.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.Name = "rdoSort"
+        Me.rdoSort.TabStop = True
+        Me.rdoSort.Tag = "Sort"
+        Me.rdoSort.UseVisualStyleBackColor = False
+        '
+        'rdoRank
+        '
+        resources.ApplyResources(Me.rdoRank, "rdoRank")
+        Me.rdoRank.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRank.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.FlatAppearance.BorderSize = 2
+        Me.rdoRank.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.Name = "rdoRank"
+        Me.rdoRank.TabStop = True
+        Me.rdoRank.Tag = "Rank"
+        Me.rdoRank.UseVisualStyleBackColor = False
+        '
+        'ucrChkMissingLast
+        '
+        Me.ucrChkMissingLast.Checked = False
+        resources.ApplyResources(Me.ucrChkMissingLast, "ucrChkMissingLast")
+        Me.ucrChkMissingLast.Name = "ucrChkMissingLast"
+        '
+        'ucrChkDecreasing
+        '
+        Me.ucrChkDecreasing.Checked = False
+        resources.ApplyResources(Me.ucrChkDecreasing, "ucrChkDecreasing")
+        Me.ucrChkDecreasing.Name = "ucrChkDecreasing"
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
         'ucrSaveRank
         '
         resources.ApplyResources(Me.ucrSaveRank, "ucrSaveRank")
         Me.ucrSaveRank.Name = "ucrSaveRank"
+        '
+        'ucrPnlMissingValues
+        '
+        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
+        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
+        '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
         '
         'ucrSelectorForRank
         '
@@ -191,15 +275,117 @@ Partial Class dlgRank
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrNudSignif)
+        Me.grpOptions.Controls.Add(Me.lblDigits)
+        Me.grpOptions.Controls.Add(Me.ucrNudDigits)
+        Me.grpOptions.Controls.Add(Me.rdoDifference)
+        Me.grpOptions.Controls.Add(Me.rdoLead)
+        Me.grpOptions.Controls.Add(Me.rdoLag)
+        Me.grpOptions.Controls.Add(Me.rdoScale)
+        Me.grpOptions.Controls.Add(Me.rdoSignif)
+        Me.grpOptions.Controls.Add(Me.rdoRound)
+        Me.grpOptions.Controls.Add(Me.ucrPnlOption)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'ucrPnlOption
+        '
+        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
+        Me.ucrPnlOption.Name = "ucrPnlOption"
+        '
+        'rdoRound
+        '
+        resources.ApplyResources(Me.rdoRound, "rdoRound")
+        Me.rdoRound.Name = "rdoRound"
+        Me.rdoRound.TabStop = True
+        Me.rdoRound.Tag = "Round"
+        Me.rdoRound.UseVisualStyleBackColor = True
+        '
+        'rdoSignif
+        '
+        resources.ApplyResources(Me.rdoSignif, "rdoSignif")
+        Me.rdoSignif.Name = "rdoSignif"
+        Me.rdoSignif.TabStop = True
+        Me.rdoSignif.Tag = "Signif"
+        Me.rdoSignif.UseVisualStyleBackColor = True
+        '
+        'rdoScale
+        '
+        resources.ApplyResources(Me.rdoScale, "rdoScale")
+        Me.rdoScale.Name = "rdoScale"
+        Me.rdoScale.TabStop = True
+        Me.rdoScale.Tag = "Scale"
+        Me.rdoScale.UseVisualStyleBackColor = True
+        '
+        'rdoLag
+        '
+        resources.ApplyResources(Me.rdoLag, "rdoLag")
+        Me.rdoLag.Name = "rdoLag"
+        Me.rdoLag.TabStop = True
+        Me.rdoLag.Tag = "Lag"
+        Me.rdoLag.UseVisualStyleBackColor = True
+        '
+        'rdoLead
+        '
+        resources.ApplyResources(Me.rdoLead, "rdoLead")
+        Me.rdoLead.Name = "rdoLead"
+        Me.rdoLead.TabStop = True
+        Me.rdoLead.Tag = "Lead"
+        Me.rdoLead.UseVisualStyleBackColor = True
+        '
+        'rdoDifference
+        '
+        resources.ApplyResources(Me.rdoDifference, "rdoDifference")
+        Me.rdoDifference.Name = "rdoDifference"
+        Me.rdoDifference.TabStop = True
+        Me.rdoDifference.Tag = "Difference"
+        Me.rdoDifference.UseVisualStyleBackColor = True
+        '
+        'ucrNudDigits
+        '
+        Me.ucrNudDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDigits, "ucrNudDigits")
+        Me.ucrNudDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDigits.Name = "ucrNudDigits"
+        Me.ucrNudDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblDigits
+        '
+        resources.ApplyResources(Me.lblDigits, "lblDigits")
+        Me.lblDigits.Name = "lblDigits"
+        '
+        'ucrNudSignif
+        '
+        Me.ucrNudSignif.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignif.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSignif, "ucrNudSignif")
+        Me.ucrNudSignif.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSignif.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignif.Name = "ucrNudSignif"
+        Me.ucrNudSignif.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgRank
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.ucrChkMissingLast)
+        Me.Controls.Add(Me.ucrChkDecreasing)
+        Me.Controls.Add(Me.rdoRank)
+        Me.Controls.Add(Me.rdoSort)
+        Me.Controls.Add(Me.rdoNumeric)
+        Me.Controls.Add(Me.rdoNonNegative)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveRank)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.ucrSelectorForRank)
-        Me.Controls.Add(Me.lblColumnsToRank)
+        Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverRank)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -210,6 +396,8 @@ Partial Class dlgRank
         Me.grpTies.ResumeLayout(False)
         Me.grpTies.PerformLayout()
         Me.grpMissingValues.ResumeLayout(False)
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -217,7 +405,7 @@ Partial Class dlgRank
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverRank As ucrReceiverSingle
-    Friend WithEvents lblColumnsToRank As Label
+    Friend WithEvents lblVariable As Label
     Friend WithEvents grpMissingValues As GroupBox
     Friend WithEvents rdoKeptAsMissing As RadioButton
     Friend WithEvents rdoLast As RadioButton
@@ -232,4 +420,22 @@ Partial Class dlgRank
     Friend WithEvents ucrPnlTies As UcrPanel
     Friend WithEvents ucrPnlMissingValues As UcrPanel
     Friend WithEvents ucrSaveRank As ucrSave
+    Friend WithEvents rdoRank As RadioButton
+    Friend WithEvents rdoSort As RadioButton
+    Friend WithEvents rdoNumeric As RadioButton
+    Friend WithEvents rdoNonNegative As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents ucrChkMissingLast As ucrCheck
+    Friend WithEvents ucrChkDecreasing As ucrCheck
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents ucrPnlOption As UcrPanel
+    Friend WithEvents rdoDifference As RadioButton
+    Friend WithEvents rdoLead As RadioButton
+    Friend WithEvents rdoLag As RadioButton
+    Friend WithEvents rdoScale As RadioButton
+    Friend WithEvents rdoSignif As RadioButton
+    Friend WithEvents rdoRound As RadioButton
+    Friend WithEvents lblDigits As Label
+    Friend WithEvents ucrNudDigits As ucrNud
+    Friend WithEvents ucrNudSignif As ucrNud
 End Class

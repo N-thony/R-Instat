@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgRank
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRankFunction As New RFunction
+    Private clsRankFunction, clsSortFunction As New RFunction
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -36,6 +36,16 @@ Public Class dlgRank
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 25
+
+        ucrPnlOptions.AddRadioButton(rdoNumeric)
+        ucrPnlOptions.AddRadioButton(rdoNonNegative)
+        ucrPnlOptions.AddRadioButton(rdoSort)
+        ucrPnlOptions.AddRadioButton(rdoRank)
+
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNumeric, "")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNonNegative, "")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSort, "sort")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoRank, "rank")
 
         'Setting Parameters and Data types allowed
         ucrReceiverRank.SetParameter(New RParameter("x", 0))
@@ -59,7 +69,20 @@ Public Class dlgRank
         ucrPnlTies.AddRadioButton(rdoRandom, Chr(34) & "random" & Chr(34))
         ucrPnlTies.SetRDefault(Chr(34) & "average" & Chr(34))
 
-        ucrSaveRank.SetPrefix("rank")
+        ucrChkDecreasing.SetText("Decreasing")
+        ucrChkDecreasing.SetParameter(New RParameter("decreasing", 1))
+        ucrChkDecreasing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkMissingLast.SetText("Missing Last")
+        ucrChkMissingLast.SetParameter(New RParameter("na.last", 2))
+        ucrChkMissingLast.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrPnlOptions.AddToLinkedControls({ucrPnlMissingValues, ucrPnlTies}, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkDecreasing, ucrChkMissingLast}, {rdoSort}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingValues.SetLinkedDisplayControl(grpMissingValues)
+        ucrPnlTies.SetLinkedDisplayControl(grpTies)
+
+        ucrSaveRank.SetPrefix("new_column")
         ucrSaveRank.SetSaveTypeAsColumn()
         ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         ucrSaveRank.SetLabelText("New Column Name:")
@@ -70,21 +93,36 @@ Public Class dlgRank
     ' Sub that runs only the first time the dialog loads it sets default RFunction as the base function
     Private Sub SetDefaults()
         clsRankFunction = New RFunction
+        clsSortFunction = New RFunction
 
         ucrSelectorForRank.Reset()
         ucrSaveRank.Reset()
+
+        clsSortFunction.SetRCommand("sort")
+        clsSortFunction.AddParameter("decreasing", "TRUE", iPosition:=1)
+        clsSortFunction.AddParameter("na.last", "TRUE", iPosition:=2)
 
         'Setting default parameters for the base function
         clsRankFunction.SetRCommand("rank")
         clsRankFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
         clsRankFunction.SetAssignTo(ucrSaveRank.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRank.GetText, bAssignToIsPrefix:=True)
 
+        ucrBase.clsRsyntax.ClearCodes()
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverRank.AddAdditionalCodeParameterPair(clsSortFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=1)
+        ucrSaveRank.AddAdditionalRCode(clsSortFunction, iAdditionalPairNo:=1)
+        ucrReceiverRank.SetRCode(clsRankFunction, bReset)
+        ucrReceiverRank.SetRCode(clsRankFunction, bReset)
+        ucrPnlMissingValues.SetRCode(clsRankFunction, bReset)
+        ucrPnlTies.SetRCode(clsRankFunction, bReset)
+        ucrSaveRank.SetRCode(clsRankFunction, bReset)
+        ucrChkDecreasing.SetRCode(clsSortFunction, bReset)
+        ucrChkMissingLast.SetRCode(clsSortFunction, bReset)
     End Sub
 
     'Testing when to Enable the OK button
@@ -101,6 +139,14 @@ Public Class dlgRank
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoRank.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
+        ElseIf rdoSort.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+        End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
