@@ -74,6 +74,7 @@ Partial Class dlgStringHandling
         Me.cmdOr = New System.Windows.Forms.Button()
         Me.rdoRegex = New System.Windows.Forms.RadioButton()
         Me.rdoFixed = New System.Windows.Forms.RadioButton()
+        Me.ucrChkAddKeyboard = New instat.ucrCheck()
         Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
@@ -84,7 +85,6 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
-        Me.ucrChkAddKeyboard = New instat.ucrCheck()
         Me.grpRegex.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -345,6 +345,12 @@ Partial Class dlgStringHandling
         Me.rdoFixed.TabStop = True
         Me.rdoFixed.UseVisualStyleBackColor = True
         '
+        'ucrChkAddKeyboard
+        '
+        Me.ucrChkAddKeyboard.Checked = False
+        resources.ApplyResources(Me.ucrChkAddKeyboard, "ucrChkAddKeyboard")
+        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
+        '
         'ucrPnlFixedRegex
         '
         resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
@@ -412,12 +418,6 @@ Partial Class dlgStringHandling
         '
         resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        '
-        'ucrChkAddKeyboard
-        '
-        Me.ucrChkAddKeyboard.Checked = False
-        resources.ApplyResources(Me.ucrChkAddKeyboard, "ucrChkAddKeyboard")
-        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
         '
         'dlgStringHandling
         '
