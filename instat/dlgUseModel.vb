@@ -62,6 +62,7 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsModel()
 
         ucrChkIncludeArguments.SetText("Show Arguments")
 
@@ -109,8 +110,6 @@ Public Class dlgUseModel
 
         ucrBase.clsRsyntax.clsBaseCommandString = clsResultAsTextFunction.clsBaseCommandString
 
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-
         KeyboardsVisibility()
         GetModels()
         TestOkEnabled()
@@ -119,6 +118,7 @@ Public Class dlgUseModel
     Private Sub SetRcodeForControls(bReset As Object)
         ucrSaveResult.SetRCode(clsResultAsTextFunction.clsBaseCommandString, bReset)
         ucrSaveGraph.SetRCode(clsResultAsGraphFunction.clsBaseCommandString, bReset)
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub TestOkEnabled()
