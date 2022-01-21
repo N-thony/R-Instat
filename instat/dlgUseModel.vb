@@ -23,7 +23,8 @@ Public Class dlgUseModel
     Public bReset As Boolean = True
     Public bUpdating As Boolean = False
 
-    Private clsAttach As New RFunction
+    Private clsAttachFunction As New RFunction
+    Private clsResultAsTextFunction, clsResultAsGraphFunction As New RSyntax
 
     Private Sub dlgUseModelLoad(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -45,6 +46,11 @@ Public Class dlgUseModel
         ucrSaveResult.SetAssignToIfUncheckedValue("last_object")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
 
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
 
         ucrReceiverForTestColumn.SetParameterIsRFunction()
         ucrReceiverForTestColumn.SetItemType("model")
@@ -67,37 +73,43 @@ Public Class dlgUseModel
 
     Private Sub SetDefaults()
         ' ucrBase.iHelpTopicID = 379
-        clsAttach = New RFunction
+        clsAttachFunction = New RFunction
+        clsResultAsGraphFunction = New RSyntax
+        clsResultAsTextFunction = New RSyntax
 
-        clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-
+        clsAttachFunction.SetRCommand("attach")
+        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorUseModel.Reset()
         ucrSaveResult.Reset()
+        ucrSaveGraph.Reset()
+        ucrSaveGraph.Visible = False
 
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrReceiverForTestColumn.Clear()
 
         ucrInputComboRPackage.SetName("General")
 
-
         ucrChkIncludeArguments.Checked = False
 
         ucrBase.clsRsyntax.ClearCodes()
 
+        clsResultAsTextFunction.SetCommandString("")
+        clsResultAsGraphFunction.SetCommandString("")
 
-        ucrBase.clsRsyntax.SetCommandString("")
+        clsResultAsTextFunction.SetAssignTo("last_object", strTempModel:="last_object", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsResultAsTextFunction.bExcludeAssignedFunctionOutput = False
+        clsResultAsTextFunction.iCallType = 2
 
-        ucrBase.clsRsyntax.SetAssignTo("last_object", strTempModel:="last_object", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempGraph:="last_graph", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 3
+
+        ucrBase.clsRsyntax.clsBaseCommandString = clsResultAsTextFunction.clsBaseCommandString
 
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-
-        ucrBase.clsRsyntax.iCallType = 2
 
         KeyboardsVisibility()
         GetModels()
@@ -105,7 +117,8 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Object)
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
+        ucrSaveResult.SetRCode(clsResultAsTextFunction.clsBaseCommandString, bReset)
+        ucrSaveGraph.SetRCode(clsResultAsGraphFunction.clsBaseCommandString, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -215,8 +228,19 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub ucrReceiverForTestColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForTestColumn.ControlValueChanged
-        ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         GetModels()
+        If ucrReceiverForTestColumn.GetText.Contains("plot") Then
+            ucrSaveGraph.Visible = True
+            ucrSaveResult.Visible = False
+            clsResultAsGraphFunction.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
+            ucrBase.clsRsyntax.clsBaseCommandString = clsResultAsGraphFunction.clsBaseCommandString
+        Else
+            ucrSaveGraph.Visible = False
+            ucrSaveResult.Visible = True
+            ucrTryModelling.SetRSyntax(clsResultAsTextFunction)
+            clsResultAsTextFunction.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
+            ucrBase.clsRsyntax.clsBaseCommandString = clsResultAsTextFunction.clsBaseCommandString
+        End If
     End Sub
 
     Private Sub GetModels()
@@ -245,10 +269,10 @@ Public Class dlgUseModel
         If i > 0 Then
             ucrInputModels.SetName(String.Join(", ", lstModels))
         End If
-        'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttach function before adiing
+        'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttachFunction function before adiing
         If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
-            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttachFunction) Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
             End If
 
         End If

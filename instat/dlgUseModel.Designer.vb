@@ -51,8 +51,6 @@ Partial Class dlgUseModel
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
-        Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.grpSegmented = New System.Windows.Forms.GroupBox()
         Me.cmdSlope = New System.Windows.Forms.Button()
         Me.cmdPscore = New System.Windows.Forms.Button()
@@ -68,12 +66,15 @@ Partial Class dlgUseModel
         Me.cmdAapc = New System.Windows.Forms.Button()
         Me.cmdSegmented = New System.Windows.Forms.Button()
         Me.cmdSegmentedPrint = New System.Windows.Forms.Button()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -417,25 +418,6 @@ Partial Class dlgUseModel
         Me.lblRpackage.TabIndex = 36
         Me.lblRpackage.Text = "R package:"
         '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 319)
-        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
-        Me.ucrSaveResult.TabIndex = 35
-        '
-        'ucrChkIncludeArguments
-        '
-        Me.ucrChkIncludeArguments.AutoSize = True
-        Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
-        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 23)
-        Me.ucrChkIncludeArguments.TabIndex = 32
-        '
         'grpSegmented
         '
         Me.grpSegmented.Controls.Add(Me.cmdSlope)
@@ -615,6 +597,35 @@ Partial Class dlgUseModel
         Me.cmdSegmentedPrint.Text = "print"
         Me.cmdSegmentedPrint.UseVisualStyleBackColor = True
         '
+        'ucrTryModelling
+        '
+        Me.ucrTryModelling.AutoSize = True
+        Me.ucrTryModelling.Location = New System.Drawing.Point(2, 285)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 30)
+        Me.ucrTryModelling.TabIndex = 163
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.TabIndex = 35
+        '
+        'ucrChkIncludeArguments
+        '
+        Me.ucrChkIncludeArguments.AutoSize = True
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
+        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 23)
+        Me.ucrChkIncludeArguments.TabIndex = 32
+        '
         'ucrInputModels
         '
         Me.ucrInputModels.AddQuotesIfUnrecognised = True
@@ -674,15 +685,14 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'ucrTryModelling
+        'ucrSaveGraph
         '
-        Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(2, 285)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.RunCommandAsMultipleLines = False
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 30)
-        Me.ucrTryModelling.TabIndex = 163
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveGraph.TabIndex = 164
         '
         'dlgUseModel
         '
@@ -690,6 +700,7 @@ Partial Class dlgUseModel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.lblRpackage)
@@ -775,4 +786,5 @@ Partial Class dlgUseModel
     Friend WithEvents cmdSlope As Button
     Friend WithEvents cmdPscore As Button
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
