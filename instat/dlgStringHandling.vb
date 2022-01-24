@@ -370,6 +370,7 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkReplaceAll.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrInputReplaceNaBy.ControlValueChanged
         If rdoDetect.Checked Then
+            ucrSaveStringHandling.SetPrefix("detect")
             If rdoDetects.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
             ElseIf rdoStarts.Checked Then
@@ -377,7 +378,6 @@ Public Class dlgStringHandling
             ElseIf rdoEnds.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
             End If
-            ucrSaveStringHandling.SetPrefix("detect")
         ElseIf rdoFind.Checked Then
             If rdoCount.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
@@ -385,27 +385,30 @@ Public Class dlgStringHandling
                 ucrSaveStringHandling.SetPrefix("count")
             ElseIf rdoExtract.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
-                ucrSaveStringHandling.SetPrefix("extract")
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsExtractAllFunction)
                     ucrSaveStringHandling.SetPrefix("extract_all")
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
+                    ucrSaveStringHandling.SetPrefix("extract")
                 End If
             ElseIf rdoLocate.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
-                ucrSaveStringHandling.SetPrefix("locate")
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLocateAllFunction)
                     ucrSaveStringHandling.SetPrefix("locate_all")
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+                    ucrSaveStringHandling.SetPrefix("locate")
                 End If
             ElseIf rdoMatch.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_match", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMatchFunction)
-                ucrSaveStringHandling.SetPrefix("match")
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMatchAllFunction)
                     ucrSaveStringHandling.SetPrefix("match_all")
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsMatchFunction)
+                    ucrSaveStringHandling.SetPrefix("match")
                 End If
             End If
         ElseIf rdoReplace.Checked Then
