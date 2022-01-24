@@ -370,7 +370,6 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkReplaceAll.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrInputReplaceNaBy.ControlValueChanged
         If rdoDetect.Checked Then
-            ucrSaveStringHandling.SetPrefix("detect")
             If rdoDetects.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
             ElseIf rdoStarts.Checked Then
@@ -378,6 +377,7 @@ Public Class dlgStringHandling
             ElseIf rdoEnds.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
             End If
+            ucrSaveStringHandling.SetPrefix("detect")
         ElseIf rdoFind.Checked Then
             If rdoCount.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
