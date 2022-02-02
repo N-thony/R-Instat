@@ -110,21 +110,35 @@ Public MustInherit Class ucrLinuxGrid
     End Function
 
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows
-        Dim lstSelectedRows As New List(Of String)
+        Dim lstSelectedRowsIndexes As New List(Of String)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
-        For Each row As DataGridViewRow In dataGrid.SelectedRows
-            lstSelectedRows.Add(row.HeaderCell.Value)
-        Next
-        Return lstSelectedRows
+        Dim selectedCellCount As Integer = dataGrid.GetCellCount(DataGridViewElementStates.Selected)
+
+        If selectedCellCount > 0 Then
+            For i As Integer = 0 To selectedCellCount - 1
+                Dim rowIndex As Integer = dataGrid.SelectedCells(i).RowIndex + 1
+                If Not lstSelectedRowsIndexes.Contains(rowIndex) Then
+                    lstSelectedRowsIndexes.Add(rowIndex)
+                End If
+            Next
+        End If
+        Return lstSelectedRowsIndexes
     End Function
 
 
     Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
         Dim lstSelectedColumnIndexes As New List(Of String)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
-        For Each Column As DataGridViewRow In dataGrid.SelectedColumns
-            lstSelectedColumnIndexes.Add(Column.HeaderCell.Value)
-        Next
+        Dim selectedCellCount As Integer = dataGrid.GetCellCount(DataGridViewElementStates.Selected)
+
+        If selectedCellCount > 0 Then
+            For i As Integer = 0 To selectedCellCount - 1
+                Dim colIndex As Integer = dataGrid.SelectedCells(i).ColumnIndex + 1
+                If Not lstSelectedColumnIndexes.Contains(colIndex) Then
+                    lstSelectedColumnIndexes.Add(colIndex)
+                End If
+            Next
+        End If
         Return lstSelectedColumnIndexes
     End Function
 
