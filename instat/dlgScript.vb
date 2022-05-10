@@ -72,6 +72,7 @@ Public Class dlgScript
         ucrReceiverGet.SetParameterIsRFunction()
         ucrReceiverGet.Selector = ucrSelectorGet
         ucrReceiverGet.bUseFilteredData = False
+        ucrReceiverGet.bUseSelectedData = False
         ucrReceiverGet.SetMeAsReceiver()
         ucrReceiverGet.SetLinkedDisplayControl(New List(Of Control)({lblGet, btnGet}))
 

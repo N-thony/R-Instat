@@ -79,34 +79,41 @@ Public Class dlgConversions
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.Selector = ucrSelectorConversions
         ucrReceiverElement.bUseFilteredData = False
+        ucrReceiverElement.bUseSelectedData = False
 
         ucrReceiverDate.SetParameter(New RParameter("doy", 2))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
         ucrReceiverDate.bUseFilteredData = False
+        ucrReceiverDate.bUseSelectedData = False
 
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 1))
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
         ucrReceiverLatitude.bUseFilteredData = False
+        ucrReceiverLatitude.bUseSelectedData = False
 
         ucrReceiverDegrees.Selector = ucrSelectorConversions
         ucrReceiverDegrees.bUseFilteredData = False
 
         ucrReceiverMinutes.Selector = ucrSelectorConversions
         ucrReceiverMinutes.bUseFilteredData = False
+        ucrReceiverMinutes.bUseSelectedData = False
 
         ucrReceiverSeconds.Selector = ucrSelectorConversions
         ucrReceiverSeconds.bUseFilteredData = False
+        ucrReceiverSeconds.bUseSelectedData = False
 
         ucrReceiverLetters.Selector = ucrSelectorConversions
         ucrReceiverLetters.bUseFilteredData = False
+        ucrReceiverLetters.bUseSelectedData = False
 
         ucrReceiverYear.SetParameter(New RParameter("x", 0))
         ucrReceiverYear.Selector = ucrSelectorConversions
         ucrReceiverYear.SetParameterIsRFunction()
         ucrReceiverYear.bUseFilteredData = False
+        ucrReceiverYear.bUseSelectedData = False
         ucrReceiverYear.SetIncludedDataTypes({"numeric"})
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 

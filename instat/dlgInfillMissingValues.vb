@@ -79,12 +79,14 @@ Public Class dlgInfillMissingValues
         ucrReceiverElement.Selector = ucrSelectorInfillMissing
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.bUseFilteredData = False
+        ucrReceiverElement.bUseSelectedData = False
 
         ucrReceiverStation.SetParameter(New RParameter("factor", 1, bNewIncludeArgumentName:=False))
         ucrReceiverStation.Selector = ucrSelectorInfillMissing
         ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bUseFilteredData = False
+        ucrReceiverStation.bUseSelectedData = False
         ucrReceiverStation.bAutoFill = True
 
         ucrReceiverDispMultShowStation.SetParameter(New RParameter("station_col_name", 3))
@@ -92,6 +94,7 @@ Public Class dlgInfillMissingValues
         ucrReceiverDispMultShowStation.SetParameterIsString()
         ucrReceiverDispMultShowStation.SetClimaticType("station")
         ucrReceiverDispMultShowStation.bUseFilteredData = False
+        ucrReceiverDispMultShowStation.bUseSelectedData = False
         ucrReceiverDispMultShowStation.bAutoFill = True
 
         ucrInputConstant.SetValidationTypeAsNumeric()

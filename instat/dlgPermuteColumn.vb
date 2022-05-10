@@ -43,6 +43,7 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.SetParameter(New RParameter("x", 0))
         ucrReceiverPermuteRows.SetParameterIsRFunction()
         ucrReceiverPermuteRows.bUseFilteredData = False
+        ucrReceiverPermuteRows.bUseSelectedData = False
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
         ucrReceiverPermuteRows.SetMeAsReceiver()
 

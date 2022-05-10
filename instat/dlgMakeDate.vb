@@ -130,6 +130,14 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.bUseFilteredData = False
         ucrReceiverDayThree.bUseFilteredData = False
 
+        'Setting selections
+        ucrReceiverForDate.bUseSelectedData = False
+        ucrReceiverYearTwo.bUseSelectedData = False
+        ucrReceiverDayTwo.bUseSelectedData = False
+        ucrReceiverYearThree.bUseSelectedData = False
+        ucrReceiverMonthThree.bUseSelectedData = False
+        ucrReceiverDayThree.bUseSelectedData = False
+
         ucrPnlDate.AddRadioButton(rdoSingleColumn)
         ucrPnlDate.AddRadioButton(rdoTwoColumns)
         ucrPnlDate.AddRadioButton(rdoThreeColumns)

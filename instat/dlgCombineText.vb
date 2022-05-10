@@ -44,6 +44,7 @@ Public Class dlgCombineText
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrReceiverCombineText.bUseFilteredData = False
+        ucrReceiverCombineText.bUseSelectedData = False
 
         ucrInputSeparator.SetParameter(New RParameter("sep", iNewPosition:=0))
         dctSeparator.Add("Space ( )", Chr(34) & " " & Chr(34))

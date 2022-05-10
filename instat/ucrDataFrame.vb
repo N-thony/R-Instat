@@ -21,6 +21,7 @@ Public Class ucrDataFrame
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Private bPvtUseFilteredData As Boolean
+    Private bPvtUseSelectedData As Boolean
     Private bPvtDropUnusedFilterLevels As Boolean = False
 
     Private strCachedDataFrameName As String = ""
@@ -78,6 +79,7 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        bUseCurrentSelection = True
         lblDataFrame.AutoSize = True
         bUpdateRCodeFromControl = True
     End Sub
@@ -249,6 +251,24 @@ Public Class ucrDataFrame
                 End If
             Else
                 clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
+            End If
+        End Set
+    End Property
+
+    Public Property bUseCurrentSelection As Boolean
+        Get
+            Return bPvtUseSelectedData
+        End Get
+        Set(bValue As Boolean)
+            bPvtUseSelectedData = bValue
+            If bPvtUseSelectedData Then
+                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsCurrDataFrame.AddParameter("use_column_selection", "TRUE")
+                Else
+                    clsCurrDataFrame.RemoveParameterByName("use_column_selection")
+                End If
+            Else
+                clsCurrDataFrame.AddParameter("use_column_selection", "FALSE")
             End If
         End Set
     End Property

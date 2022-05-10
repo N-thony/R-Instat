@@ -93,6 +93,7 @@ Public Class dlgTransform
         ucrReceiverRank.Selector = ucrSelectorForRank
         ucrReceiverRank.SetMeAsReceiver()
         ucrReceiverRank.bUseFilteredData = False
+        ucrReceiverRank.bUseSelectedData = False
         ucrReceiverRank.SetParameterIsRFunction()
         ucrReceiverRank.SetDataType("numeric")
         ucrReceiverRank.strSelectorHeading = "Numerics"

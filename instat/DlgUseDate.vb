@@ -48,6 +48,7 @@ Public Class dlgUseDate
         ucrReceiverUseDate.Selector = ucrSelectorUseDate
         ucrReceiverUseDate.SetMeAsReceiver()
         ucrReceiverUseDate.bUseFilteredData = False
+        ucrReceiverUseDate.bUseSelectedData = False
         ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
         ucrReceiverUseDate.strSelectorHeading = "Dates"
         ucrReceiverUseDate.bAutoFill = True

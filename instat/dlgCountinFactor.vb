@@ -45,6 +45,7 @@ Public Class dlgCountinFactor
         ucrCountReceiver.strSelectorHeading = "Factors"
         ucrCountReceiver.SetMeAsReceiver()
         ucrCountReceiver.bUseFilteredData = False
+        ucrCountReceiver.bUseSelectedData = False
 
         ' ucrNewColName
         ucrNewColName.SetIsComboBox()

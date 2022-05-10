@@ -66,6 +66,15 @@ Public Class ucrSelectorByDataFrame
         End Set
     End Property
 
+    Public Property bUseCurrentSelection As Boolean
+        Get
+            Return ucrAvailableDataFrames.bUseCurrentSelection
+        End Get
+        Set(bValue As Boolean)
+            ucrAvailableDataFrames.bUseCurrentSelection = bValue
+        End Set
+    End Property
+
     Public Property bDropUnusedFilterLevels As Boolean
         Get
             Return ucrAvailableDataFrames.bDropUnusedFilterLevels

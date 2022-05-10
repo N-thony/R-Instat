@@ -45,6 +45,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.bUseFilteredData = False
+        ucrReceiverStringHandling.bUseSelectedData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
         ucrPnlStringHandling.AddRadioButton(rdoDetect)

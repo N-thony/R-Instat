@@ -53,6 +53,7 @@ Public Class dlgSPI
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.bUseFilteredData = False
+        ucrReceiverStation.bUseSelectedData = False
 
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.SetParameter(New RParameter("year", 2))
@@ -60,6 +61,7 @@ Public Class dlgSPI
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.bUseFilteredData = False
+        ucrReceiverYear.bUseSelectedData = False
 
         ucrReceiverMonth.SetParameterIsString()
         ucrReceiverMonth.SetParameter(New RParameter("month", 3))
@@ -67,6 +69,7 @@ Public Class dlgSPI
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.bUseFilteredData = False
+        ucrReceiverMonth.bUseSelectedData = False
 
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.SetParameter(New RParameter("element", 4))
@@ -74,6 +77,7 @@ Public Class dlgSPI
         ucrReceiverElement.Selector = ucrSelectorVariable
         ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.bUseFilteredData = False
+        ucrReceiverElement.bUseSelectedData = False
 
         'setting up Nuds
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))

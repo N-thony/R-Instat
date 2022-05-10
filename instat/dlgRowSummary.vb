@@ -60,6 +60,7 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
         ucrReceiverForRowSummaries.bUseFilteredData = True
+        ucrReceiverForRowSummaries.bUseSelectedData = True
         ucrReceiverForRowSummaries.bForceAsDataFrame = False
         ucrReceiverForRowSummaries.SetParameterIsString()
         ucrReceiverForRowSummaries.bWithQuotes = False

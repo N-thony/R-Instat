@@ -160,6 +160,15 @@ Public Class ucrReceiverMultiple
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
                     End If
+                    If bUseSelectedData Then
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("use_column_selection", "TRUE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("use_column_selection")
+                        End If
+                    Else
+                        clsGetVariablesFunc.AddParameter("use_column_selection", "FALSE")
+                    End If
                     If bDropUnusedFilterLevels Then
                         clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
                     Else
@@ -226,6 +235,9 @@ Public Class ucrReceiverMultiple
                 End If
                 If Not bUseFilteredData Then
                     clsColumnFunction.AddParameter("use_current_filter", "FALSE")
+                End If
+                If Not bUseSelectedData Then
+                    clsColumnFunction.AddParameter("use_column_selection", "FALSE")
                 End If
                 lstColumnFunctions.Add(clsColumnFunction)
             Next

@@ -67,6 +67,7 @@ Public Class sdgSaveColumnPosition
         ucrReceiverColumn.Selector = ucrSelectorColumns
         ucrReceiverColumn.SetMeAsReceiver()
         ucrReceiverColumn.bUseFilteredData = False
+        ucrReceiverColumn.bUseSelectedData = False
         ucrReceiverColumn.SetLinkedDisplayControl(lblColumns)
 
         'todo. change visibilty to true once this feature is implemented

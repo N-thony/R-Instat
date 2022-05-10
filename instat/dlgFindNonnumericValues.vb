@@ -52,6 +52,7 @@ Public Class dlgFindNonnumericValues
 
         ucrReceiverColumn.Selector = ucrSelectorShowNonNumericValues
         ucrSelectorShowNonNumericValues.bUseCurrentFilter = False
+        ucrSelectorShowNonNumericValues.bUseCurrentSelection = False
 
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
         ucrReceiverColumn.SetParameterIsString()

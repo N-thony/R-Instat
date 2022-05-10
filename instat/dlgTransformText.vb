@@ -57,6 +57,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.SetParameterIsRFunction()
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
+        ucrReceiverTransformText.bUseSelectedData = False
         ucrReceiverTransformText.SetMeAsReceiver()
         ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
         ucrReceiverTransformText.strSelectorHeading = "Characters"
@@ -170,6 +171,7 @@ Public Class dlgTransformText
         'parameter for this control has been passed manually
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
+        ucrReceiverFirstWord.bUseSelectedData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
 
         'parameter for this control has been passed manually
@@ -182,6 +184,7 @@ Public Class dlgTransformText
         'parameter for this control has been passed manually
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
+        ucrReceiverLastWord.bUseSelectedData = False
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
 
         ' ucrInputSeparator

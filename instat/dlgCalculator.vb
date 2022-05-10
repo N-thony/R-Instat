@@ -58,6 +58,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
+        ucrCalc.ucrSelectorForCalculations.bUseCurrentSelection = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
     End Sub

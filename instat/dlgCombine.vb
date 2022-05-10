@@ -44,6 +44,7 @@ Public Class dlgCombine
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.bUseFilteredData = False
+        ucrFactorsReceiver.bUseSelectedData = False
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"}, bStrict:=True)
 
         ucrInputSeparator.SetParameter(New RParameter("sep", 2))

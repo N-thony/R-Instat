@@ -45,6 +45,8 @@ Public Class dlgRecodeFactor
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 37
 
+        ucrSelectorForRecode.bUseCurrentSelection = False
+
         ucrPnlOptions.AddRadioButton(rdoRecode)
         ucrPnlOptions.AddRadioButton(rdoAddNa)
         ucrPnlOptions.AddRadioButton(rdoOther)
@@ -90,6 +92,7 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetParameterIsRFunction()
         ucrReceiverFactor.bUseFilteredData = False
+        ucrReceiverFactor.bUseSelectedData = False
 
         ucrInputAddNa.SetParameter(New RParameter("na_level", 1))
 
