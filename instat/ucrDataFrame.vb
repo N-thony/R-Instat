@@ -53,10 +53,6 @@ Public Class ucrDataFrame
     ''' </summary>    
     Private bSuppressRefresh As Boolean = False
 
-    'todo. this event just be replaced with control value changed event.
-    'the ControlValueChanged is sufficent enough. So delete?
-    Public Event DataFrameChanged(sender As Object)
-
     Public ReadOnly Property iDataFrameLength As Integer
         Get
             Return If(cboAvailableDataFrames.Text = "", 0, frmMain.DataBook.GetDataFrame(cboAvailableDataFrames.Text).iTotalRowCount)
@@ -74,6 +70,8 @@ Public Class ucrDataFrame
             InitialiseControl()
             bFirstLoad = False
         End If
+        'always load data frame names on load event because a data frame may have been deleted
+        'and the control needs to refresh the data frame names.
         LoadDataFrameNamesAndFillComboBox()
     End Sub
 
@@ -96,7 +94,6 @@ Public Class ucrDataFrame
         'Note. This is necessary because of the way some dialogs are set up
         'for instance, dialogs that manually add parameters to their R Functions
         'need these events raised even though the data frame has not changed.
-        RaiseEvent DataFrameChanged(Me)
         OnControlValueChanged()
     End Sub
 
@@ -160,8 +157,7 @@ Public Class ucrDataFrame
         'set cached data frame name
         strCachedDataFrameName = cboAvailableDataFrames.Text
 
-        'raise events
-        RaiseEvent DataFrameChanged(Me)
+        'raise event
         OnControlValueChanged()
 
         'if dialogs are set to change 'overall' selected data frame
