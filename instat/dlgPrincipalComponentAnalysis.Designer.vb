@@ -47,6 +47,11 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
         Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverSuppNumeric = New instat.ucrReceiverMultiple()
+        Me.lblSupplNumeric = New System.Windows.Forms.Label()
+        Me.ucrChkExtraVariables = New instat.ucrCheck()
+        Me.ucrReceiverSupplFactors = New instat.ucrReceiverMultiple()
+        Me.lblSupplFactors = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblExplanatoryVariables
@@ -61,7 +66,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(309, 254)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(309, 414)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
         Me.cmdPCAOptions.Size = New System.Drawing.Size(96, 23)
         Me.cmdPCAOptions.TabIndex = 7
@@ -139,17 +144,77 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 443)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
+        '
+        'ucrReceiverSuppNumeric
+        '
+        Me.ucrReceiverSuppNumeric.AutoSize = True
+        Me.ucrReceiverSuppNumeric.frmParent = Me
+        Me.ucrReceiverSuppNumeric.Location = New System.Drawing.Point(252, 188)
+        Me.ucrReceiverSuppNumeric.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSuppNumeric.Name = "ucrReceiverSuppNumeric"
+        Me.ucrReceiverSuppNumeric.Selector = Nothing
+        Me.ucrReceiverSuppNumeric.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSuppNumeric.strNcFilePath = ""
+        Me.ucrReceiverSuppNumeric.TabIndex = 9
+        Me.ucrReceiverSuppNumeric.ucrSelector = Nothing
+        '
+        'lblSupplNumeric
+        '
+        Me.lblSupplNumeric.AutoSize = True
+        Me.lblSupplNumeric.Location = New System.Drawing.Point(253, 171)
+        Me.lblSupplNumeric.Name = "lblSupplNumeric"
+        Me.lblSupplNumeric.Size = New System.Drawing.Size(79, 13)
+        Me.lblSupplNumeric.TabIndex = 10
+        Me.lblSupplNumeric.Tag = "Explanatory_Variables"
+        Me.lblSupplNumeric.Text = "Suppl.Numeric:"
+        '
+        'ucrChkExtraVariables
+        '
+        Me.ucrChkExtraVariables.AutoSize = True
+        Me.ucrChkExtraVariables.Checked = False
+        Me.ucrChkExtraVariables.Location = New System.Drawing.Point(5, 294)
+        Me.ucrChkExtraVariables.Name = "ucrChkExtraVariables"
+        Me.ucrChkExtraVariables.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkExtraVariables.TabIndex = 11
+        '
+        'ucrReceiverSupplFactors
+        '
+        Me.ucrReceiverSupplFactors.AutoSize = True
+        Me.ucrReceiverSupplFactors.frmParent = Me
+        Me.ucrReceiverSupplFactors.Location = New System.Drawing.Point(257, 310)
+        Me.ucrReceiverSupplFactors.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSupplFactors.Name = "ucrReceiverSupplFactors"
+        Me.ucrReceiverSupplFactors.Selector = Nothing
+        Me.ucrReceiverSupplFactors.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSupplFactors.strNcFilePath = ""
+        Me.ucrReceiverSupplFactors.TabIndex = 12
+        Me.ucrReceiverSupplFactors.ucrSelector = Nothing
+        '
+        'lblSupplFactors
+        '
+        Me.lblSupplFactors.AutoSize = True
+        Me.lblSupplFactors.Location = New System.Drawing.Point(257, 293)
+        Me.lblSupplFactors.Name = "lblSupplFactors"
+        Me.lblSupplFactors.Size = New System.Drawing.Size(70, 13)
+        Me.lblSupplFactors.TabIndex = 13
+        Me.lblSupplFactors.Tag = "Explanatory_Variables"
+        Me.lblSupplFactors.Text = "Suppl.Factor:"
         '
         'dlgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 341)
+        Me.ClientSize = New System.Drawing.Size(417, 495)
+        Me.Controls.Add(Me.lblSupplFactors)
+        Me.Controls.Add(Me.ucrReceiverSupplFactors)
+        Me.Controls.Add(Me.ucrChkExtraVariables)
+        Me.Controls.Add(Me.lblSupplNumeric)
+        Me.Controls.Add(Me.ucrReceiverSuppNumeric)
         Me.Controls.Add(Me.ucrChkScaleData)
         Me.Controls.Add(Me.ucrNudNumberOfComp)
         Me.Controls.Add(Me.lblComponents)
@@ -180,4 +245,9 @@ Partial Class dlgPrincipalComponentAnalysis
     Friend WithEvents ucrNudNumberOfComp As ucrNud
     Friend WithEvents ucrChkScaleData As ucrCheck
     Friend WithEvents ucrSaveResult As ucrSave
+    Friend WithEvents lblSupplNumeric As Label
+    Friend WithEvents ucrReceiverSuppNumeric As ucrReceiverMultiple
+    Friend WithEvents ucrChkExtraVariables As ucrCheck
+    Friend WithEvents lblSupplFactors As Label
+    Friend WithEvents ucrReceiverSupplFactors As ucrReceiverMultiple
 End Class

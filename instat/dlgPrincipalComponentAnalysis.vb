@@ -19,12 +19,12 @@ Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsPCAFunction As New RFunction
-    Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
+    Private clsPCAFunction, clsWhichQuantiSupFunction, clsColNamesQuantFunction As New RFunction
+    Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig, clsDummyFunction As New RFunction
     Private clsRScreePlotFunction, clsRThemeMinimal, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
     Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue As New RFunction
     Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
-    Dim clsRBarPlot, clsRBarPlot0, clsBaseOperator As New ROperator
+    Dim clsRBarPlot, clsRBarPlot0, clsBaseOperator, clsBinaryQuantiSupOperator, clsBinaryQualitySupOperator As New ROperator
     ' call all classes in the sub dialog
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -46,12 +46,31 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.SetParameter(New RParameter("data_name", 0))
         ucrSelectorPCA.SetParameterIsString()
 
+
         'ucrReceiver
         ucrReceiverMultiplePCA.SetParameter(New RParameter("X", 1))
         ucrReceiverMultiplePCA.SetParameterIsRFunction()
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
-        ucrReceiverMultiplePCA.SetDataType("numeric")
+        'ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrReceiverMultiplePCA.SetMeAsReceiver()
+
+        ucrReceiverSuppNumeric.SetParameter(New RParameter("right", 1))
+        ucrReceiverSuppNumeric.SetParameterIsString()
+        ucrReceiverSuppNumeric.Selector = ucrSelectorPCA
+        ucrReceiverSuppNumeric.SetDataType("numeric")
+        ucrReceiverSuppNumeric.SetLinkedDisplayControl(lblSupplNumeric)
+
+        ucrReceiverSupplFactors.SetParameter(New RParameter("right", 1))
+        ucrReceiverSupplFactors.SetParameterIsString()
+        ucrReceiverSupplFactors.Selector = ucrSelectorPCA
+        ucrReceiverSupplFactors.SetDataType("factor")
+        ucrReceiverSupplFactors.SetLinkedDisplayControl(lblSupplFactors)
+        'ucrReceiverSuppNumeric.SetMeAsReceiver()
+
+        ucrChkExtraVariables.SetText("Extra Variables")
+        ucrChkExtraVariables.SetParameter(New RParameter("checked", iNewPosition:=0))
+        ucrChkExtraVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkExtraVariables.AddToLinkedControls({ucrReceiverSuppNumeric, ucrReceiverSupplFactors}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrCheckBox
         ucrChkScaleData.SetParameter(New RParameter("scale.unit", 2))
@@ -102,10 +121,36 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlotFunctionValue = New RFunction
         clsRIndividualsFunctionValue = New RFunction
         clsRBiplotFunctionValue = New RFunction
+        clsDummyFunction = New RFunction
+        clsColNamesQuantFunction = New RFunction
+        clsWhichQuantiSupFunction = New RFunction
+        clsBinaryQuantiSupOperator = New ROperator
+        clsBinaryQualitySupOperator = New ROperator
+
         ' package name, r command and defaults for sdg
 
         ucrSelectorPCA.Reset()
         ucrSaveResult.Reset()
+
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
+
+        clsWhichQuantiSupFunction.SetRCommand("which")
+        clsWhichQuantiSupFunction.AddParameter("x", clsRFunctionParameter:=clsColNamesQuantFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+
+        clsColNamesQuantFunction.SetRCommand("colnames")
+
+        clsBinaryQuantiSupOperator.SetOperation("%in%")
+        clsBinaryQuantiSupOperator.AddParameter("left", clsRFunctionParameter:=clsWhichQuantiSupFunction, iPosition:=0)
+        clsBinaryQuantiSupOperator.SetAssignTo("col_1")
+
+        clsBinaryQualitySupOperator.SetOperation("%in%")
+        clsBinaryQualitySupOperator.AddParameter("left", clsRFunctionParameter:=clsWhichQuantiSupFunction, iPosition:=0)
+        clsBinaryQualitySupOperator.SetAssignTo("col_2")
+
+
+
+        'clsBinaryOperator.AddParameter("left", clsRFunctionParameter:=clsWhichFunction, iPosition:=0)
 
         clsPCAFunction.SetPackageName("FactoMineR")
         clsPCAFunction.SetRCommand("PCA")
@@ -129,12 +174,12 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotationEig.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRRotationEig.AddParameter("value1", Chr(34) & "eig" & Chr(34))
 
-        clsRRotation.SetRCommand("sweep")
-        clsRRotation.AddParameter("x", clsRFunctionParameter:=clsRRotationCoord)
-        clsRRotation.AddParameter("MARGIN", 2)
-        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
-        clsRRotation.AddParameter("FUN", " '/'")
-        clsRRotation.iCallType = 2
+        'clsRRotation.SetRCommand("sweep")
+        'clsRRotation.AddParameter("x", clsRFunctionParameter:=clsRRotationCoord)
+        'clsRRotation.AddParameter("MARGIN", 2)
+        'clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        'clsRRotation.AddParameter("FUN", " '/'")
+        'clsRRotation.iCallType = 2
 
         ' Scree Function
         clsBaseOperator.SetOperation("+")
@@ -213,7 +258,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
         ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
         ModelName()
         bResetSubdialog = True
@@ -223,12 +268,17 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsREigenVectors, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationCoord, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=2)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=3)
-        '        ucrSaveResult.AddAdditionalCodeParameterPair(clsRRotationEig, New RParameter("model_name", 0), iAdditionalPairNo:=1)
+        'ucrSelectorPCA.AddAdditionalCodeParameterPair(clsNamesFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
 
+        '        ucrSaveResult.AddAdditionalCodeParameterPair(clsRRotationEig, New RParameter("model_name", 0), iAdditionalPairNo:=1)
+        ucrReceiverMultiplePCA.AddAdditionalCodeParameterPair(clsColNamesQuantFunction, New RParameter("x", bNewIncludeArgumentName:=False), iAdditionalPairNo:=0)
         ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
         ucrReceiverMultiplePCA.SetRCode(clsPCAFunction, bReset)
+        ucrReceiverSuppNumeric.SetRCode(clsBinaryQuantiSupOperator, bReset)
+        ucrReceiverSupplFactors.SetRCode(clsBinaryQualitySupOperator, bReset)
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
         ucrChkScaleData.SetRCode(clsPCAFunction, bReset)
+        ucrChkExtraVariables.SetRCode(clsDummyFunction, bReset)
         ucrNudNumberOfComp.SetRCode(clsPCAFunction, bReset)
     End Sub
 
@@ -282,18 +332,45 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
+    'Private Sub GetVariables()
+    '    If ucrChkExtraVariables.Checked Then
+    '        ucrReceiverSuppNumeric.SetMeAsReceiver()
+    '        clsPCAFunction.AddParameter("quanti.sup", clsRFunctionParameter:=ucrSelectorPCA.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=4)
+    '    End If
+    'End Sub
+
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        'clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+
+        'clsColNamesQuantFunction.AddParameter("x", ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+        'clsColNamesQualiFunction.AddParameter("x", ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+        clsPCAFunction.AddParameter("X", clsRFunctionParameter:=ucrSelectorPCA.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
         ModelName()
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        'clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
         ModelName()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkExtraVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtraVariables.ControlValueChanged, ucrReceiverSuppNumeric.ControlValueChanged, ucrReceiverSupplFactors.ControlValueChanged
+        ucrReceiverSuppNumeric.SetMeAsReceiver()
+        If ucrChkExtraVariables.Checked AndAlso Not ucrReceiverSuppNumeric.IsEmpty Then
+            clsPCAFunction.AddParameter("quanti.sup", clsRFunctionParameter:=clsWhichQuantiSupFunction, iPosition:=4)
+        Else
+            clsPCAFunction.RemoveParameterByName("quanti.sup")
+        End If
+
+        If ucrChkExtraVariables.Checked AndAlso Not ucrReceiverSupplFactors.IsEmpty Then
+            clsPCAFunction.AddParameter("quali.sup", clsRFunctionParameter:=clsWhichQuantiSupFunction, iPosition:=4)
+        Else
+            clsPCAFunction.RemoveParameterByName("quali.sup")
+        End If
     End Sub
 End Class
