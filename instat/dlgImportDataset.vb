@@ -1141,7 +1141,7 @@ Public Class dlgImportDataset
         Return frmMain.clsRLink.MakeValidText(strCleanFileName)
     End Function
 
-    Private Sub lblImportingSheets_Click(sender As Object, e As EventArgs) Handles lblImportingSheets.Click
+    Private Sub grpCSV_Enter(sender As Object, e As EventArgs) Handles grpCSV.Enter
 
     End Sub
 
