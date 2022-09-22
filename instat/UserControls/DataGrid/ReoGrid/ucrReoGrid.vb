@@ -217,10 +217,12 @@ Public MustInherit Class ucrReoGrid
         If frmMain.clsInstatOptions IsNot Nothing Then
             'Set enitre range apart from top row
             workSheet.SetRangeStyles(New RangePosition(1, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.HorizontalAlign Or PlainStyleFlag.TextWrap,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
-                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name,
+                                .HAlign = ReoGridHorAlign.Left,
+                                .TextWrapMode = TextWrapMode.NoWrap
                                 })
             'Set top row
             workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
