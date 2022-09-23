@@ -218,11 +218,11 @@ Public MustInherit Class ucrReoGrid
             'Set enitre range apart from top row
             If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
                 workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName OR PlainStyleFlag.TextWrap,
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.TextWrap,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name,
-                                .TextWrapMode = TextWrapMode.BreakAll
+                                .TextWrapMode = TextWrapMode.WordBreak
                                 })
             Else
                 workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
