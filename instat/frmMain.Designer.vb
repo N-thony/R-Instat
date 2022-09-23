@@ -678,6 +678,9 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbWrap = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuTbWrapOption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbUnWrapOption = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2999,7 +3002,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbWrap, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -3081,13 +3084,13 @@ Partial Class frmMain
         'mnuSubTbPaste
         '
         Me.mnuSubTbPaste.Name = "mnuSubTbPaste"
-        Me.mnuSubTbPaste.Size = New System.Drawing.Size(142, 22)
+        Me.mnuSubTbPaste.Size = New System.Drawing.Size(180, 22)
         Me.mnuSubTbPaste.Text = "Paste"
         '
         'mnuSubTbPasteSpecial
         '
         Me.mnuSubTbPasteSpecial.Name = "mnuSubTbPasteSpecial"
-        Me.mnuSubTbPasteSpecial.Size = New System.Drawing.Size(142, 22)
+        Me.mnuSubTbPasteSpecial.Size = New System.Drawing.Size(180, 22)
         Me.mnuSubTbPasteSpecial.Text = "Paste Special"
         '
         'separator1
@@ -5113,6 +5116,29 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuTbWrap
+        '
+        Me.mnuTbWrap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbWrap.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbWrapOption, Me.mnuTbUnWrapOption})
+        Me.mnuTbWrap.Image = Global.instat.My.Resources.Resources.paste2
+        Me.mnuTbWrap.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbWrap.Name = "mnuTbWrap"
+        Me.mnuTbWrap.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbWrap.Text = "ToolStripSplitButton3"
+        Me.mnuTbWrap.ToolTipText = "Paste"
+        '
+        'mnuTbWrapOption
+        '
+        Me.mnuTbWrapOption.Name = "mnuTbWrapOption"
+        Me.mnuTbWrapOption.Size = New System.Drawing.Size(180, 22)
+        Me.mnuTbWrapOption.Text = "Wrap"
+        '
+        'mnuTbUnWrapOption
+        '
+        Me.mnuTbUnWrapOption.Name = "mnuTbUnWrapOption"
+        Me.mnuTbUnWrapOption.Size = New System.Drawing.Size(180, 22)
+        Me.mnuTbUnWrapOption.Text = "Unwrap"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5809,4 +5835,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromRapidPro As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromPostgres As ToolStripMenuItem
+    Friend WithEvents mnuTbWrap As ToolStripSplitButton
+    Friend WithEvents mnuTbWrapOption As ToolStripMenuItem
+    Friend WithEvents mnuTbUnWrapOption As ToolStripMenuItem
 End Class

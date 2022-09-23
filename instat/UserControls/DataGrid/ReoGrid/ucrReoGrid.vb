@@ -216,14 +216,24 @@ Public MustInherit Class ucrReoGrid
         'changes. This would then override the back color set in R
         If frmMain.clsInstatOptions IsNot Nothing Then
             'Set enitre range apart from top row
-            workSheet.SetRangeStyles(New RangePosition(1, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.HorizontalAlign Or PlainStyleFlag.TextWrap,
+            If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
+                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName OR PlainStyleFlag.TextWrap,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name,
-                                .HAlign = ReoGridHorAlign.Left,
-                                .TextWrapMode = TextWrapMode.NoWrap
+                                .TextWrapMode = TextWrapMode.BreakAll
                                 })
+            Else
+                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                    .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.TextWrap,
+                    .TextColor = frmMain.clsInstatOptions.clrEditor,
+                    .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                    .FontName = frmMain.clsInstatOptions.fntEditor.Name,
+                    .TextWrapMode = TextWrapMode.NoWrap
+                    })
+                workSheet.SetRowsHeight(row:=0, count:=workSheet.RowCount, height:=20)
+            End If
             'Set top row
             workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,

@@ -29,6 +29,7 @@ Public Class frmMain
     Public strHelpFilePath As String = "Help\R-Instat.chm"
     Public strAppDataPath As String
     Public strInstatOptionsFile As String = "Options.bin"
+    Public enumWRAPMode As String = WRAPMode.UnWrap
     Public clsInstatOptions As InstatOptions
     Public clsRecentItems As clsRecentFiles
     'Public strCurrentDataFrame As String
@@ -83,6 +84,11 @@ Public Class frmMain
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
     End Sub
+
+    Public Enum WRAPMode
+        Wrap
+        UnWrap
+    End Enum
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
@@ -2473,5 +2479,15 @@ Public Class frmMain
 
     Private Sub mnuFileImportFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
         dlgImportFromPostgres.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbWrapOption_Click(sender As Object, e As EventArgs) Handles mnuTbWrapOption.Click
+        enumWRAPMode = WRAPMode.Wrap
+        ucrDataViewer.UpdateAllWorksheetStyles()
+    End Sub
+
+    Private Sub mnuTbUnWrapOption_Click(sender As Object, e As EventArgs) Handles mnuTbUnWrapOption.Click
+        enumWRAPMode = WRAPMode.UnWrap
+        ucrDataViewer.UpdateAllWorksheetStyles()
     End Sub
 End Class
