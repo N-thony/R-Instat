@@ -212,36 +212,28 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
-        'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
-        'changes. This would then override the back color set in R
-        If frmMain.clsInstatOptions IsNot Nothing Then
-            'Set enitre range apart from top row
-            If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
+        Try
+            'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
+            'changes. This would then override the back color set in R
+            If frmMain.clsInstatOptions IsNot Nothing Then
+                'Set enitre range apart from top row
                 workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.TextWrap,
-                                .TextColor = frmMain.clsInstatOptions.clrEditor,
-                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
-                                .FontName = frmMain.clsInstatOptions.fntEditor.Name,
-                                .TextWrapMode = TextWrapMode.WordBreak
-                                })
-            Else
-                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                    .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName Or PlainStyleFlag.TextWrap,
-                    .TextColor = frmMain.clsInstatOptions.clrEditor,
-                    .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
-                    .FontName = frmMain.clsInstatOptions.fntEditor.Name,
-                    .TextWrapMode = TextWrapMode.NoWrap
-                    })
-                workSheet.SetRowsHeight(row:=0, count:=workSheet.RowCount, height:=20)
+                                    .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                    .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                    .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                    .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                    })
+                'Set top row
+                workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                    .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                    .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                    .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                    .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                    })
             End If
-            'Set top row
-            workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
-                                .TextColor = frmMain.clsInstatOptions.clrEditor,
-                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
-                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
-                                })
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load

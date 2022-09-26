@@ -143,6 +143,10 @@ Public Class ucrDataViewLinuxGrid
         Return lstColumns
     End Function
 
+    Private Sub UpdateWorksheetSetting() Implements IDataViewGrid.UpdateWorksheetSetting
+
+    End Sub
+
     Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
         RaiseEvent WorksheetChanged()
     End Sub

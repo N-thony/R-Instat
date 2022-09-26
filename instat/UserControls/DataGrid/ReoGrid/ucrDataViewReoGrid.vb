@@ -142,10 +142,29 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Sub UpdateWorksheetSettings(workSheet As Worksheet)
-        workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-        workSheet.SetRowsHeight(0, 1, 20)
-        Dim rngDataRange As New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
-        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+        Try
+            If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
+                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                .Flag = PlainStyleFlag.TextWrap,
+                .TextWrapMode = TextWrapMode.WordBreak
+                })
+            Else
+                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                .Flag = PlainStyleFlag.TextWrap,
+                .TextWrapMode = TextWrapMode.NoWrap
+                })
+                workSheet.SetRowsHeight(0, workSheet.RowCount, 20)
+            End If
+            'workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+            Dim rngDataRange As New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
+            workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub UpdateWorksheetSetting() Implements IDataViewGrid.UpdateWorksheetSetting
+        UpdateWorksheetSettings(grdData.CurrentWorksheet)
     End Sub
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)

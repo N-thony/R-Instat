@@ -100,6 +100,10 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Sub UpdateWorksheetSetting()
+        _grid.UpdateWorksheetSetting()
+    End Sub
+
     Public Sub UpdateAllWorksheetStyles()
         _grid.UpdateAllWorksheetStyles()
     End Sub

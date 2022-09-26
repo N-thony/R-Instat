@@ -2483,11 +2483,11 @@ Public Class frmMain
 
     Private Sub mnuTbWrapOption_Click(sender As Object, e As EventArgs) Handles mnuTbWrapOption.Click
         enumWRAPMode = WRAPMode.Wrap
-        ucrDataViewer.UpdateAllWorksheetStyles()
+        ucrDataViewer.UpdateWorksheetSetting()
     End Sub
 
     Private Sub mnuTbUnWrapOption_Click(sender As Object, e As EventArgs) Handles mnuTbUnWrapOption.Click
         enumWRAPMode = WRAPMode.UnWrap
-        ucrDataViewer.UpdateAllWorksheetStyles()
+        ucrDataViewer.UpdateWorksheetSetting()
     End Sub
 End Class

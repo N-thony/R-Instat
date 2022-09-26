@@ -33,6 +33,8 @@ Public Interface IDataViewGrid
 
     Sub AddRowData(dataFrame As clsDataFrame)
 
+    Sub UpdateWorksheetSetting()
+
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
     Function GetWorksheetCount() As Integer
