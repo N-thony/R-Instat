@@ -640,6 +640,9 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   previous_length = self$get_column_count()
   if(adjacent_column != "" && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
+  if(class(col_data) %in% c("integer", "numeric")){
+    col_data <- format(col_data, justify = "left", scientific = FALSE, trim = TRUE)
+  }
   new_col_names <- c()
   for(i in 1:num_cols) {
     if(num_cols == 1) {
