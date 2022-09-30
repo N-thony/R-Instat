@@ -143,19 +143,23 @@ Public Class ucrDataViewReoGrid
 
     Private Sub UpdateWorksheetSettings(workSheet As Worksheet)
         Try
-            If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
-                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                .Flag = PlainStyleFlag.TextWrap,
-                .TextWrapMode = TextWrapMode.WordBreak
-                })
-            Else
-                workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
-                .Flag = PlainStyleFlag.TextWrap,
-                .TextWrapMode = TextWrapMode.NoWrap
-                })
-                workSheet.SetRowsHeight(0, workSheet.RowCount, 20)
-            End If
+            'If frmMain.enumWRAPMode = frmMain.WRAPMode.Wrap Then
+            '    workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+            '    .Flag = PlainStyleFlag.TextWrap,
+            '    .TextWrapMode = TextWrapMode.WordBreak
+            '    })
+            'Else
+            '    workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+            '    .Flag = PlainStyleFlag.TextWrap,
+            '    .TextWrapMode = TextWrapMode.NoWrap
+            '    })
+            '    workSheet.SetRowsHeight(0, workSheet.RowCount, 20)
+            'End If
             'workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+            workSheet.SetRangeStyles(New RangePosition(0, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Right
+                })
             Dim rngDataRange As New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
             workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
         Catch ex As Exception
