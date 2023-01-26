@@ -109,7 +109,7 @@ Public Class ucrDataViewReoGrid
         If strCurrWorksheet <> "" Then
             grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet)
             grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
-            grdData.CurrentWorksheet.SetColumnsWidth(0, 1, 70)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, grdData.CurrentWorksheet.ColumnCount, 70)
         End If
     End Sub
 
