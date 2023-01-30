@@ -27,7 +27,7 @@ Public Class sdgSummaryThemes
 
     Private Sub InitialiseControls()
         Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts, dctFontNames, dctFootnotesMarks,
-        dctFootnotesMultiline As New Dictionary(Of String, String)
+        dctFootnotesMultiline, dctSeparators As New Dictionary(Of String, String)
 
         dctWeights.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctWeights.Add("Normal", Chr(34) & "normal" & Chr(34))
@@ -81,8 +81,15 @@ Public Class sdgSummaryThemes
         dctFootnotesMarks.Add("Extended", Chr(34) & "extended" & Chr(34))
 
         dctFootnotesMultiline.Add("NULL", Chr(34) & "NULL" & Chr(34))
-        dctFootnotesMultiline.Add("True", Chr(34) & "TRUE" & Chr(34))
-        dctFootnotesMultiline.Add("False", Chr(34) & "FALSE" & Chr(34))
+        dctFootnotesMultiline.Add("True", "TRUE")
+        dctFootnotesMultiline.Add("False", "FALSE")
+
+        dctSeparators.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctSeparators.Add("Space", "  ")
+        dctSeparators.Add("Semi-colon ", " ; ")
+        dctSeparators.Add("Colon", " : ")
+        dctSeparators.Add("Comma", " , ")
+        dctSeparators.Add("Dash", "-")
 
         'Titles
         ucrChkBackgroundColour.SetText("Background Colour")
@@ -120,17 +127,17 @@ Public Class sdgSummaryThemes
         ucrChkSubTitleWeight.AddParameterPresentCondition(True, "heading.subtitle.font.weight")
         ucrChkSubTitleWeight.AddParameterPresentCondition(False, "heading.subtitle.font.weight", False)
 
-        ucrChkBoxWidth.SetText("Box Width")
+        ucrChkBoxWidth.SetText("Vertical Padding")
         ucrNudBoxWidth.SetParameter(New RParameter("heading.padding"))
         ucrNudBoxWidth.SetRDefault(0)
         ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding")
         ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding", False)
 
-        ucrChkBoxWidth.SetText("Box Length")
-        ucrNudBoxWidth.SetParameter(New RParameter("heading.padding.horizontal"))
-        ucrNudBoxWidth.SetRDefault(0)
-        ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding.horizontal")
-        ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding,horizontal", False)
+        ucrChkBoxLength.SetText("Horizontal Padding")
+        ucrNudBoxLength.SetParameter(New RParameter("heading.padding.horizontal"))
+        ucrNudBoxLength.SetRDefault(0)
+        ucrChkBoxLength.AddParameterPresentCondition(True, "heading.padding.horizontal")
+        ucrChkBoxLength.AddParameterPresentCondition(False, "heading.padding,horizontal", False)
 
         ucrChkBottomWidth.SetText("Bottom Width")
         ucrNudBottomWidth.SetParameter(New RParameter("heading.border.bottom.width"))
@@ -700,6 +707,7 @@ Public Class sdgSummaryThemes
 
         ucrChkFootnotesSeparator.SetText("Footnotes Separator")
         ucrInputFootnotesSeparator.SetParameter(New RParameter("footnotes.sep"))
+        ucrInputFootnotesSeparator.SetItems(dctSeparators)
         ucrChkFootnotesSeparator.AddParameterPresentCondition(True, "footnotes.sep")
         ucrChkFootnotesSeparator.AddParameterPresentCondition(False, "footnotes.sep", False)
 
@@ -776,14 +784,14 @@ Public Class sdgSummaryThemes
         ucrChkSourcenotesFontSize.AddParameterPresentCondition(False, "source_notes.font.size", False)
 
         ucrChkSourcenotesMultiline.SetText("Sourcenotes Multiline")
-        ucrInputSourcenotesMultiline.SetParameter(New RParameter("source_notes.marks"))
+        ucrInputSourcenotesMultiline.SetParameter(New RParameter("source_notes.multiline"))
         ucrInputSourcenotesMultiline.SetItems(dctFootnotesMultiline)
-        ucrChkSourcenotesMultiline.AddParameterPresentCondition(True, "source_notes.marks")
-        ucrChkSourcenotesMultiline.AddParameterPresentCondition(False, "source_notes.marks", False)
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(True, "source_notes.multiline")
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(False, "source_notes.multiline", False)
 
         ucrChkSourcenotesSeparator.SetText("Sourcenotes Separator")
         ucrInputSourcenotesSeparator.SetParameter(New RParameter("source_notes.sep"))
-        ' ucrInputFootnotesSeparator.SetItems(dctSeparators)
+        ucrInputFootnotesSeparator.SetItems(dctSeparators)
         ucrChkSourcenotesSeparator.AddParameterPresentCondition(True, "source_notes.sep")
         ucrChkSourcenotesSeparator.AddParameterPresentCondition(False, "source_notes.sep", False)
 
@@ -1080,4 +1088,9 @@ Public Class sdgSummaryThemes
         bRCodeSet = True
     End Sub
 
+    Private Sub tbpSummaryThemes_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpSummaryThemes.Selecting
+        If e.TabPageIndex = 2 Or e.TabPageIndex = 3 Or e.TabPageIndex = 4 Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class

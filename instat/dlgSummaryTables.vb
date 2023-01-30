@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bResetRCode = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
@@ -238,9 +239,7 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
-        clsDummyFunction.AddParameter("check", "select", iPosition:=11)
-        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=12)
-        clsDummyFunction.AddParameter("theme", "select", iPosition:=13)
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
 
         clsSummaryOperator.SetOperation("+")
 
@@ -327,7 +326,7 @@ Public Class dlgSummaryTables
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=2)
+        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=8)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
@@ -381,8 +380,6 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrReceiverFactors.GetParameter, iAdditionalPairNo:=1)
 
         ucrSelectorSummaryTables.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkFrequencyDisplayMargins.SetRCode(clsFrequencyDefaultFunction, bReset)
@@ -397,12 +394,18 @@ Public Class dlgSummaryTables
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        If bReset Then
+            ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
+            ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
+        End If
         FillListView()
+
+
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoSummaryTable.Checked Then
-            If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso
+            If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso Not ucrReceiverFactors.IsEmpty AndAlso
                 ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso
                 Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
                 ucrBase.OKEnabled(True)
