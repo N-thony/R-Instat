@@ -431,6 +431,7 @@ Public Class DlgDefineClimaticData
             grpMeta.Visible = True
             grpStation.Visible = False
             ucrBase.clsRsyntax.AddToAfterCodes(clsNewDefautFunction, iPosition:=0)
+            clsNewDefautFunction.iCallType = 2
         Else
             ucrSelectorLinkedDataFrame.Visible = False
             grpMeta.Visible = False
