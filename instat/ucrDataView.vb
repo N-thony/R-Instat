@@ -106,6 +106,12 @@ Public Class ucrDataView
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
+    Public Sub SearchInGrid(lstRows As List(Of String), strVariable As String,
+                            bFindNext As Boolean, Optional iClick As Integer = 0,
+                            Optional bCellOrRow As Boolean = False)
+        _grid.SearchInGrid(lstRows, strVariable, bFindNext, iClick, bCellOrRow)
+    End Sub
+
     Private Sub UpdateNavigationButtons()
         lblColBack.Enabled = If(GetCurrentDataFrameFocus()?.clsVisibleDataFramePage?.CanLoadPreviousColumnPage(), False)
         lblColNext.Enabled = If(GetCurrentDataFrameFocus()?.clsVisibleDataFramePage?.CanLoadNextColumnPage(), False)
@@ -914,10 +920,15 @@ Public Class ucrDataView
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
 
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificRowPage(sdgWindowNumber.iPage)
         End If
     End Sub
+
+    Public Sub GoToSpecificRowPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
 
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then

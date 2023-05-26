@@ -111,6 +111,85 @@ Public Class ucrDataViewReoGrid
         End If
     End Function
 
+    Public Sub SearchInGrid(lstRows As List(Of String), strColumn As String, bFindNext As Boolean,
+                            Optional iClick As Integer = 0, Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+        Dim iSearchRow As Integer = 0
+        Dim iSearchCol As Integer = 0
+        Dim iColIndex As Integer = GetColumnIndex(strColumn)
+        Dim currSheet = grdData.CurrentWorksheet
+        UpdateSheet(currSheet:=currSheet, iRowIndex:=0, iRows:=0)
+        If Not bFindNext Then
+            For Each iRow In lstRows
+                If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+                    Dim iRowIndex = GetRowIndex(iRow)
+                    If bCellOrRow Then
+                        If iSearchRow = 0 Then
+                            currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                            currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                        End If
+                        currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
+                        iSearchRow += 1
+                    Else
+                        If iSearchCol = 0 Then
+                            currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                            currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                        End If
+                        UpdateSheet(currSheet:=currSheet, iRowIndex:=iRowIndex, iRows:=1)
+                        iSearchCol += 1
+                    End If
+                End If
+            Next
+        Else
+            If iClick < lstRows.Count Then
+                Dim iRow = lstRows(iClick)
+                If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+                    Dim iRowIndex = GetRowIndex(iRow)
+                    If bCellOrRow Then
+                        currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                        currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                    Else
+                        currSheet.SelectRows(iRowIndex, 1)
+                        currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                        currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                    End If
+                End If
+                End If
+        End If
+    End Sub
+
+    Private Sub UpdateSheet(currSheet As Worksheet, iRowIndex As Integer, iRows As Integer)
+        currSheet.SetRangeStyles(New RangePosition(iRowIndex, 0, iRows, currSheet.ColumnCount),
+              New WorksheetRangeStyle With {.Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or
+                                             PlainStyleFlag.FontName Or PlainStyleFlag.BackColor,
+                                             .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                             .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                             .FontName = frmMain.clsInstatOptions.fntEditor.Name,
+                                             .BackColor = Color.LightGreen})
+    End Sub
+    Private Function GetColumnIndex(strColName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Columns - 1
+                Dim strCol As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
+                If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowIndex(strRowName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Rows - 1
+                Dim strCol As String = grdData.CurrentWorksheet.RowHeaders(i).Text
+                If strCol = strRowName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1

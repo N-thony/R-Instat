@@ -37,4 +37,7 @@ Public Interface IDataViewGrid
 
     Function GetWorksheetCount() As Integer
 
+    Sub SearchInGrid(lstRows As List(Of String), strColumn As String, bFindNext As Boolean,
+                     Optional iClick As Integer = 0, Optional bCellOrRow As Boolean = False)
+
 End Interface
