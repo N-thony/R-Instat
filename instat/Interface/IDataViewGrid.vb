@@ -39,4 +39,6 @@ Public Interface IDataViewGrid
 
     Function GetWorksheetCount() As Integer
 
+    Sub ResetGridRowHeightAndColumnWidth(strCurrWorksheet As String)
+
 End Interface

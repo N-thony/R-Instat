@@ -2948,10 +2948,9 @@ Partial Class frmMain
         '
         'mnuEditWordwrap
         '
-        Me.mnuEditWordwrap.Enabled = False
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
         Me.mnuEditWordwrap.Size = New System.Drawing.Size(244, 22)
-        Me.mnuEditWordwrap.Text = "Wordwrap"
+        Me.mnuEditWordwrap.Text = "Wrap"
         '
         'mnuEditSelectAll
         '
