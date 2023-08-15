@@ -643,12 +643,12 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudAngle.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
-        ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
 
         If bReset Then
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
+            ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
             ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         End If
     End Sub
