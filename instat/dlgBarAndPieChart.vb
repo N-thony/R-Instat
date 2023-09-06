@@ -633,8 +633,11 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudAngle.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
-        ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
+
+        If bReset Then
+            ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -868,6 +871,7 @@ Public Class dlgBarAndPieChart
             If ucrReceiverByFactor.IsEmpty Then
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
+                clsRgeomBarFunction.RemoveParameterByName("position")
             End If
             If ucrChkLollipop.Checked Then
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
@@ -886,6 +890,7 @@ Public Class dlgBarAndPieChart
             If ucrReceiverByFactor.IsEmpty Then
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
+                clsRgeomBarFunction.RemoveParameterByName("position")
             End If
             clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
             clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
