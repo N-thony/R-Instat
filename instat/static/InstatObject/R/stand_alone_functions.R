@@ -2960,13 +2960,17 @@ cumulative_inventory <- function(data, station = NULL, from, to){
 }
 
 getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
-  if(use_regex){
+  if (use_regex) {
     # Find the rows that match the search text using regex
     matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
-  }else if (is.na(searchText)){
+  } else if (is.na(searchText)) {
     matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
-  }else{
-    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
+  } else {
+    if (ignore_case) {
+      matchingRows <- tolower(data[[column]]) == tolower(searchText)
+    } else {
+      matchingRows <- data[[column]] == searchText
+    }
   }
   # Get the row headers where the search text is found
   rowHeaders <- rownames(data)[matchingRows]
