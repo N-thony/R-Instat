@@ -106,7 +106,7 @@ Public Class dlgClimograph
     Private bUpdatingParameters As Boolean = False
     Private bUpdateComboOptions1 As Boolean = True
     Private bUpdatingParameters1 As Boolean = False
-    Private strScale As String = "Scale_Factor"
+    Private strScale As String = "scale_Factor"
 
     Private Sub dlgClimograph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -1428,6 +1428,7 @@ Public Class dlgClimograph
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
         bResetSubdialog = False
+        AddRemoveSecondaryAxis()
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
