@@ -185,7 +185,9 @@ pkgs <-
     "weights",
     "nanonext",
     "collapse",
-    "PlackettLuce"
+    "PlackettLuce",
+    "ggraph",
+    "tidygraph"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Antoine/Documents/RPackages"
